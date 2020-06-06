@@ -16,8 +16,9 @@ public class ConnectionFactory {
     //Atributos constantes
     private static final String DRIVER = "com.mysql.jdbc.Driver";
     private static final String URL = "jdbc:mysql://localhost:3306/serra";
-    private static final String USER = "roor";
+    private static final String USER = "root";
     private static final String PASS = "";
+    
     
     //Construtor da classe
     public ConnectionFactory(){
@@ -30,9 +31,8 @@ public class ConnectionFactory {
             Class.forName(DRIVER);
             return DriverManager.getConnection(URL, USER, PASS);
         } catch (ClassNotFoundException | SQLException ex) {
-            System.err.println("Erro ao tentar conectar "+ex);
-        }
-        return null;   
+            throw new RuntimeException("Erro na conexão "+ex);
+        }   
     }
     
     //Métodos responsáveis por fechar a conexão com o banco
